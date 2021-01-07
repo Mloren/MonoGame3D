@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<PublishReadyToRun>false</PublishReadyToRun>
+		<TieredCompilation>false</TieredCompilation>
+		<MonoGamePlatform>Windows</MonoGamePlatform>
+		<UseWindowsForms>true</UseWindowsForms>
+		<DisableWinExeOutputInference>true</DisableWinExeOutputInference>
+		<ApplicationIcon>AppData\Icon.ico</ApplicationIcon>
+		<DotnetCommand Condition="'$(DotnetCommand)' == ''">dotnet</DotnetCommand>
+		<EnableMGCBItems Condition="'$(EnableMGCBItems)' == ''">true</EnableMGCBItems>
+		<MGCBPath Condition="'$(MGCBPath)' == ''">$(SolutionDir)MonoGame\mgcb\mgcb.dll</MGCBPath>
+	</PropertyGroup>
+
+	<Import Project="$(SolutionDir)MonoGame\MonoGame.Content.Builder.Task.targets" />
+
+	<ItemGroup>
+		<ProjectReference Include="..\GameEngine\GameEngine.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="MonoGame.Framework">
+			<HintPath>..\MonoGame\MonoGame.Framework.dll</HintPath>
+		</Reference>
+		<Reference Include="SharpDX">
+			<HintPath>..\MonoGame\net452\SharpDX.dll</HintPath>
+		</Reference>
+		<Reference Include="SharpDX.DXGI">
+			<HintPath>..\MonoGame\net452\SharpDX.DXGI.dll</HintPath>
+		</Reference>
+		<Reference Include="SharpDX.Direct3D11">
+			<HintPath>..\MonoGame\net452\SharpDX.Direct3D11.dll</HintPath>
+		</Reference>
+		<Reference Include="SharpDX.XInput">
+			<HintPath>..\MonoGame\net452\SharpDX.XInput.dll</HintPath>
+		</Reference>
+		<Reference Include="SharpDX.MediaFoundation">
+			<HintPath>..\MonoGame\net452\SharpDX.MediaFoundation.dll</HintPath>
+		</Reference>
+		<Reference Include="SharpDX.Mathematics">
+			<HintPath>..\MonoGame\net452\SharpDX.Mathematics.dll</HintPath>
+		</Reference>
+		<Reference Include="SharpDX.XAudio2">
+			<HintPath>..\MonoGame\net452\SharpDX.XAudio2.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+  
+	<ItemGroup>
+		<TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
+	</ItemGroup>
+  
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="xcopy /Y &quot;$(SolutionDir)MonoGame\x64\SDL2.dll&quot; &quot;$(OutDir)&quot;&#xD;&#xA;xcopy /Y &quot;$(SolutionDir)MonoGame\x64\soft_oal.dll&quot; &quot;$(OutDir)&quot;&#xD;&#xA;xcopy /Y &quot;$(SolutionDir)MonoGame\net452\*.dll&quot; &quot;$(OutDir)&quot;" />
+	</Target>
+</Project>

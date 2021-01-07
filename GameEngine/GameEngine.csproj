@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<PublishReadyToRun>false</PublishReadyToRun>
+		<TieredCompilation>false</TieredCompilation>
+		<ApplicationManifest>AppData\app.manifest</ApplicationManifest>
+		<ApplicationIcon>AppData\Icon.ico</ApplicationIcon>
+	</PropertyGroup>
+		
+	<ItemGroup>
+		<Reference Include="MonoGame.Framework">
+			<HintPath>..\MonoGame\MonoGame.Framework.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+  
+	<ItemGroup>
+		<TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
+	</ItemGroup>
+</Project>
